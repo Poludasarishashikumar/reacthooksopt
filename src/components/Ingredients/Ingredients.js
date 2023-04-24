@@ -59,7 +59,7 @@ function Ingredients() {
     dispatch({type:'SET',ingredients:filteredIngredients});
   },[]);
  
-  const removeIngredientHandler=ingredientId=>{
+  const removeIngredientHandler=useCallback( ingredientId=>{
     dispatchHttp({type:'SEND'});
     fetch(`https://react-hooks-update-75dee-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,{
       method:'DELETE',
@@ -74,11 +74,11 @@ function Ingredients() {
     }).catch(error=>{
       dispatchHttp({type:'ERROR',errorMessage:'Something went wrong!'});
     })
-  }
+  },[])
 
   
 
-  const addIngredientHandler = (ingredient) => {
+  const addIngredientHandler = useCallback((ingredient) => {
     // setIsloading(true);
     dispatchHttp({type:'SEND'});
     fetch('https://react-hooks-update-75dee-default-rtdb.firebaseio.com/ingredients.json',{
@@ -99,7 +99,7 @@ function Ingredients() {
       dispatchHttp({type:'ERROR',errorMessage:'Something went wrong!'});
           });
     
-  };
+  },[]);
   const clearError=()=>{
     // setError(null);
     // setIsloading(false);
