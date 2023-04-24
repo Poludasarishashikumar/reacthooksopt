@@ -28,6 +28,18 @@ function Ingredients() {
     setUserIngredients(filteredIngredients);
   },[]);
  
+  const removeIngredientHandler=ingredientId=>{
+    fetch(`https://react-hooks-update-75dee-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,{
+      method:'DELETE',
+    
+      
+    }).then(response=>{
+
+      setUserIngredients(prevIngredients => 
+        prevIngredients.filter(ingredient=>ingredient.id !==ingredientId)
+      );
+    })
+  }
 
   
 
@@ -53,7 +65,7 @@ function Ingredients() {
 
       <section>
         <Search onLoadIngredients={filteredIngredientshandler} />
-        <IngredientList ingredients={userIngredients} onRemoveItem={()=>{}} />
+        <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler} />
       </section>
     </div>
   );
