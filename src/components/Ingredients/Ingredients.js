@@ -24,6 +24,10 @@ function Ingredients() {
       );
   },[]);
 
+  useEffect(()=>{
+    console.log("Rendernimg Ingredients",userIngredients);
+  },[userIngredients]);
+
   
 
   const addIngredientHandler = (ingredient) => {
