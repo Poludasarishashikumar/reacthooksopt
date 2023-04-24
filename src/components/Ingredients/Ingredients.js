@@ -1,10 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IngredientList from "./IngredientList";
 import IngredientForm from "./IngredientForm";
 import Search from "./Search";
 
 function Ingredients() {
   const [userIngredients, setUserIngredients] = useState([]);
+  useEffect(()=>{
+
+    fetch('https://react-hooks-update-75dee-default-rtdb.firebaseio.com/ingredients.json').then(
+      response=>response.json()).then(
+        responseData=>{
+          const loadedIngredients=[];
+          for(const key in responseData)
+          {
+            loadedIngredients.push({
+              id:key,
+              title:responseData[key].title,
+              amount:responseData[key].amount
+            })
+          }
+          // setUserIngredients(loadedIngredients);
+        }
+      );
+  },[]);
+
+  
+
   const addIngredientHandler = (ingredient) => {
     fetch('https://react-hooks-update-75dee-default-rtdb.firebaseio.com/ingredients.json',{
       method:'POST',
