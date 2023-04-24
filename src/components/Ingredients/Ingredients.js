@@ -24,9 +24,10 @@ function Ingredients() {
       );
   },[]);
 
-  useEffect(()=>{
-    console.log("Rendernimg Ingredients",userIngredients);
-  },[userIngredients]);
+  const filteredIngredientshandler=filteredIngredients=>{
+    setUserIngredients(filteredIngredients);
+  }
+ 
 
   
 
@@ -51,7 +52,7 @@ function Ingredients() {
       <IngredientForm  onAddIngredient={addIngredientHandler}  />
 
       <section>
-        <Search />
+        <Search onLoadIngredients={filteredIngredientshandler} />
         <IngredientList ingredients={userIngredients} onRemoveItem={()=>{}} />
       </section>
     </div>
